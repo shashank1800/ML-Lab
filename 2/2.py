@@ -16,17 +16,17 @@ D = Domain()
 
 def consistant(h1, h2):
     for x, y in zip(h1, h2):
-        if not (x == "?" or (x != "ɸ" and (x == y or y == "ɸ"))):
+        if not (x == "?" or (x != "@" and (x == y or y == "@"))):
             return False
     return True
 
 
 def candidate_elimination():
     G = {('?',) * (len(data[0]) - 1), }
-    S = ['ɸ'] * (len(data[0]) - 1)
+    S = ['@'] * (len(data[0]) - 1)
     no = 0
-    print("\n G[{0}]:".format(no), G)
-    print("\n S[{0}]:".format(no), S)
+    print("\n G :", G)
+    print("\n S :", S)
     for item in data:
         no += 1
         inp, res = item[:-1], item[-1]
@@ -35,7 +35,7 @@ def candidate_elimination():
             G = {g for g in G if consistant(g, inp)}
             for s, x in zip(S, inp):  # similar to find-s
                 if not s == x:
-                    S[i] = '?' if s != 'ɸ' else x
+                    S[i] = '?' if s != '@' else x
                 i += 1
         else:
             S = S  # unaffected for this eg.
